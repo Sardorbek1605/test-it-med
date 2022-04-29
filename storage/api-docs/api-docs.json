@@ -1,0 +1,149 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Appointments Demo Documentation",
+        "description": "This is the documentation of Appointments api",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/api/appointment/{id}": {
+            "get": {
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Get appointment information",
+                "description": "Returns appointment data",
+                "operationId": "getAppointmentById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Appointment id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/appointment/store": {
+            "post": {
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Store new appointment",
+                "description": "Returns success",
+                "operationId": "storeAppointment",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreAppointmentRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Appointment"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Appointment": {
+                "title": "Appointment",
+                "description": "Appointment model",
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "description": "Message of the success",
+                        "type": "string",
+                        "example": "Success!"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Appointment"
+                }
+            },
+            "StoreAppointmentRequest": {
+                "title": "Store Project request",
+                "description": "Store Project request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "title": {
+                        "title": "title",
+                        "description": "Title of the new appointment",
+                        "type": "string",
+                        "example": "A appointment"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the new appointment",
+                        "type": "string",
+                        "example": "This is new appointment's description"
+                    },
+                    "patient_id": {
+                        "title": "patient_id",
+                        "description": "Patients id of the new appointment",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 4
+                    },
+                    "practitioner_id": {
+                        "title": "practitioner_id",
+                        "description": "Practitioner id of the new appointment",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 5
+                    },
+                    "organization_id": {
+                        "title": "organization_id",
+                        "description": "Organization's id of the new appointment",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 3
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
