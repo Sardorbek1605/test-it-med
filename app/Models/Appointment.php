@@ -16,10 +16,10 @@ class Appointment extends Model
     }
 
     public function organization(){
-        return $this->belongsTo(Organization::class, 'patient_id', 'id');
+        return $this->belongsTo(Organization::class, 'organization_id', 'id');
     }
 
     public function practitioner(){
-        return $this->belongsTo(Practitioner::class, 'patient_id', 'id');
+        return $this->belongsTo(Practitioner::class, 'practitioner_id', 'id');
     }
 }
